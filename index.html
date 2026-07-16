@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tas — Research Portfolio &amp; Academic Narrative</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink-950:#081210;
+    --ink-900:#0e1a17;
+    --ink-800:#132521;
+    --panel:#101f1b;
+    --paper:#EDE7DA;
+    --paper-dim:#c9c3b6;
+    --amber:#E8A33D;
+    --coral:#E4633D;
+    --teal:#2E8C86;
+    --mist:#9FB8B2;
+    --line:rgba(159,184,178,0.16);
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink-950);
+    color:var(--paper);
+    font-family:'Inter', sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--amber); color:var(--ink-950);}
+
+  h1,h2,h3,h4{font-family:'Fraunces', serif; font-weight:500; letter-spacing:-0.01em; color:var(--paper);}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--amber);
+    display:flex;
+    align-items:center;
+    gap:0.6rem;
+  }
+  .eyebrow::before{content:''; width:22px; height:1px; background:var(--amber); display:inline-block;}
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
+  section{position:relative;}
+
+  a{color:inherit;}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    backdrop-filter:blur(10px);
+    background:rgba(8,18,16,0.72);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:var(--maxw); margin:0 auto; padding:18px 32px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .nav-mark{
+    font-family:'Fraunces', serif; font-style:italic; font-weight:500;
+    font-size:1.05rem; color:var(--paper);
+  }
+  .nav-mark span{color:var(--amber); font-style:normal;}
+  .nav-links{display:flex; gap:28px; list-style:none;}
+  .nav-links a{
+    font-family:'IBM Plex Mono', monospace; font-size:0.72rem;
+    text-transform:uppercase; letter-spacing:0.08em;
+    color:var(--mist); text-decoration:none; position:relative; padding-bottom:4px;
+    transition:color .25s;
+  }
+  .nav-links a::after{
+    content:''; position:absolute; left:0; bottom:0; width:0; height:1px;
+    background:var(--amber); transition:width .3s;
+  }
+  .nav-links a:hover, .nav-links a.active{color:var(--paper);}
+  .nav-links a.active::after{width:100%;}
+  .nav-toggle{display:none;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100svh;
+    display:flex; flex-direction:column; justify-content:center;
+    padding-top:90px; padding-bottom:60px;
+  }
+  .hero .wrap{width:100%;}
+  .hero-eyebrow{margin-bottom:28px;}
+  .hero h1{
+    font-size:clamp(2.4rem, 5.4vw, 4.6rem);
+    line-height:1.04;
+    max-width:16ch;
+    margin-bottom:28px;
+  }
+  .hero h1 em{
+    font-style:italic; font-weight:400;
+    background:linear-gradient(90deg, var(--amber), var(--coral) 55%, var(--teal));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero-sub{
+    font-size:1.08rem; max-width:52ch; color:var(--mist); font-weight:300;
+    margin-bottom:44px;
+  }
+  .hero-meta{
+    display:flex; gap:40px; flex-wrap:wrap;
+    font-family:'IBM Plex Mono', monospace; font-size:0.78rem; color:var(--paper-dim);
+  }
+  .hero-meta div{border-left:1px solid var(--line); padding-left:14px;}
+  .hero-meta strong{display:block; color:var(--amber); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px; font-weight:500;}
+
+  .spectrum-line{width:100%; margin-top:56px;}
+  .spectrum-line svg{width:100%; height:auto; display:block;}
+  .spectrum-path{
+    stroke-dasharray:1400;
+    stroke-dashoffset:1400;
+    animation:draw 2.4s cubic-bezier(.4,0,.2,1) forwards .3s;
+  }
+  @keyframes draw{to{stroke-dashoffset:0;}}
+
+  /* ---------- REVEAL ---------- */
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .8s ease, transform .8s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- SECTION HEADS ---------- */
+  .section-head{margin-bottom:56px; max-width:640px;}
+  .section-head h2{font-size:clamp(1.8rem,3.2vw,2.6rem); margin-top:18px;}
+  .section-pad{padding:120px 0;}
+  .rule{border-top:1px solid var(--line);}
+
+  /* ---------- STORY ---------- */
+  .story blockquote{
+    font-family:'Fraunces', serif; font-style:italic; font-weight:400;
+    font-size:clamp(1.15rem, 2vw, 1.55rem);
+    line-height:1.6; color:var(--paper);
+    border-left:2px solid var(--coral); padding-left:32px;
+    max-width:840px;
+  }
+  .story blockquote p{margin-bottom:22px;}
+  .story blockquote p:last-child{margin-bottom:0;}
+  .story .callout{
+    font-family:'Fraunces', serif; font-style:italic; color:var(--amber);
+    font-size:1.3em; display:block; margin:26px 0;
+  }
+
+  /* ---------- JOURNEY (timeline) ---------- */
+  .timeline{position:relative; padding-left:0;}
+  .tl-item{
+    display:grid; grid-template-columns:120px 1fr; gap:36px;
+    padding:40px 0; border-top:1px solid var(--line); position:relative;
+  }
+  .tl-item:first-child{border-top:none;}
+  .tl-tag{font-family:'IBM Plex Mono', monospace; font-size:0.75rem; color:var(--teal); letter-spacing:0.06em; padding-top:6px;}
+  .tl-body h3{font-size:1.4rem; margin-bottom:10px;}
+  .tl-body .thesis{
+    font-family:'IBM Plex Mono', monospace; font-size:0.82rem; color:var(--coral);
+    margin:14px 0; line-height:1.7;
+  }
+  .tl-body p{color:var(--mist); max-width:64ch; font-weight:300;}
+  .tl-body .qshift{margin:18px 0; padding:16px 20px; background:var(--panel); border-radius:4px; border:1px solid var(--line);}
+  .tl-body .qshift span{display:block; font-family:'Fraunces',serif; font-style:italic; color:var(--paper-dim); font-size:0.98rem;}
+  .tl-body .qshift span.to{color:var(--amber); margin-top:8px;}
+  .tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;}
+  .tag{
+    font-family:'IBM Plex Mono', monospace; font-size:0.68rem; text-transform:uppercase;
+    letter-spacing:0.06em; color:var(--mist); border:1px solid var(--line);
+    padding:5px 10px; border-radius:20px;
+  }
+
+  /* ---------- RESEARCH / PUBLICATIONS ---------- */
+  .metrics-row{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-bottom:64px;}
+  .metric{border-top:1px solid var(--coral); padding-top:16px;}
+  .metric .num{font-family:'Fraunces',serif; font-size:2.6rem; color:var(--paper);}
+  .metric .lbl{font-family:'IBM Plex Mono',monospace; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--mist); margin-top:6px;}
+
+  .pub{
+    display:grid; grid-template-columns:90px 1fr; gap:28px;
+    padding:28px 0; border-top:1px solid var(--line);
+  }
+  .pub:last-child{border-bottom:1px solid var(--line);}
+  .pub-year{font-family:'IBM Plex Mono',monospace; color:var(--amber); font-size:1rem; padding-top:2px;}
+  .pub h4{font-size:1.08rem; font-weight:500; margin-bottom:8px; line-height:1.4;}
+  .pub .journal{font-family:'IBM Plex Mono',monospace; font-size:0.76rem; color:var(--teal); text-transform:uppercase; letter-spacing:0.04em;}
+
+  /* ---------- EXCELLENCE ---------- */
+  .excellence-grid{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line);}
+  .ex-card{background:var(--ink-950); padding:40px;}
+  .ex-card .gpa{font-family:'Fraunces',serif; font-size:3.2rem; color:var(--paper); line-height:1;}
+  .ex-card .gpa small{font-size:1.2rem; color:var(--mist); font-family:'IBM Plex Mono',monospace;}
+  .ex-card .deg{font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.08em; font-size:0.72rem; color:var(--amber); margin-bottom:14px; display:block;}
+  .ex-card ul{list-style:none; margin-top:18px;}
+  .ex-card li{
+    font-size:0.92rem; color:var(--mist); padding:8px 0 8px 18px; position:relative;
+    border-top:1px solid var(--line);
+  }
+  .ex-card li:first-child{border-top:none;}
+  .ex-card li::before{content:'—'; position:absolute; left:0; color:var(--coral);}
+
+  /* ---------- BEYOND THE LAB ---------- */
+  .beyond{background:var(--ink-900); position:relative; overflow:hidden;}
+  .ridge-bg{position:absolute; inset:0; opacity:0.5; pointer-events:none;}
+  .ridge-bg svg{width:100%; height:100%;}
+  .beyond-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:80px; position:relative;}
+  .beyond-col h3{font-size:1.15rem; margin-bottom:10px; color:var(--paper);}
+  .role-block{padding:24px 0; border-top:1px solid var(--line);}
+  .role-block:first-child{border-top:none;}
+  .role-block .role-tag{font-family:'IBM Plex Mono',monospace; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--teal); margin-bottom:8px; display:block;}
+  .role-block p{color:var(--mist); font-size:0.94rem; font-weight:300; max-width:56ch;}
+
+  .life-card{
+    background:var(--panel); border:1px solid var(--line); border-radius:6px;
+    padding:36px; position:sticky; top:110px;
+  }
+  .life-card .eyebrow{margin-bottom:20px;}
+  .life-card p{color:var(--paper-dim); font-size:0.98rem; font-weight:300; margin-bottom:18px;}
+  .life-tags{display:flex; flex-wrap:wrap; gap:10px; margin-top:22px;}
+  .life-tag{
+    font-family:'Fraunces',serif; font-style:italic; font-size:0.95rem;
+    color:var(--amber); border-bottom:1px solid var(--coral); padding-bottom:2px;
+  }
+
+  /* ---------- HONORS ---------- */
+  .honors-list{display:flex; flex-direction:column;}
+  .honor{
+    display:grid; grid-template-columns:1fr 3fr; gap:28px; align-items:baseline;
+    padding:26px 0; border-top:1px solid var(--line);
+  }
+  .honor:last-child{border-bottom:1px solid var(--line);}
+  .honor-year{font-family:'IBM Plex Mono',monospace; color:var(--coral); font-size:0.85rem;}
+  .honor h4{font-size:1.05rem; font-weight:500; margin-bottom:6px;}
+  .honor p{color:var(--mist); font-size:0.9rem; font-weight:300;}
+
+  /* ---------- VISION ---------- */
+  .vision{text-align:left; padding:140px 0;}
+  .vision-inner{max-width:800px;}
+  .vision blockquote{
+    font-family:'Fraunces',serif; font-weight:400; font-style:italic;
+    font-size:clamp(1.4rem,3vw,2.1rem); line-height:1.5;
+    background:linear-gradient(90deg, var(--paper), var(--mist) 90%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  footer{padding:80px 0 50px; border-top:1px solid var(--line);}
+  .footer-grid{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:40px;}
+  .footer-cta h3{font-size:1.6rem; max-width:14ch; margin-bottom:14px;}
+  .footer-cta p{color:var(--mist); max-width:40ch; font-weight:300;}
+  .contact-list{display:flex; flex-direction:column; gap:10px; font-family:'IBM Plex Mono',monospace; font-size:0.85rem;}
+  .contact-list a{text-decoration:none; color:var(--paper-dim); border-bottom:1px solid transparent; transition:border-color .25s, color .25s;}
+  .contact-list a:hover{color:var(--amber); border-color:var(--amber);}
+  .foot-note{margin-top:60px; font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--paper-dim); opacity:0.5; display:flex; justify-content:space-between;}
+
+  @media (max-width:860px){
+    .beyond-grid{grid-template-columns:1fr; gap:48px;}
+    .life-card{position:static;}
+    .excellence-grid{grid-template-columns:1fr;}
+    .metrics-row{grid-template-columns:1fr; gap:32px;}
+    .tl-item{grid-template-columns:1fr; gap:10px;}
+    .pub{grid-template-columns:60px 1fr;}
+    .nav-links{display:none;}
+    .honor{grid-template-columns:1fr; gap:6px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{transition:none; opacity:1; transform:none;}
+    .spectrum-path{animation:none; stroke-dashoffset:0;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-mark">Tasnim Tareq Ferdous<span>.</span></div>
+    <ul class="nav-links">
+      <li><a href="#story" data-nav>Story</a></li>
+      <li><a href="#journey" data-nav>Journey</a></li>
+      <li><a href="#research" data-nav>Research</a></li>
+      <li><a href="#beyond" data-nav>Beyond the Lab</a></li>
+      <li><a href="#honors" data-nav>Honors</a></li>
+      <li><a href="#contact" data-nav>Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-eyebrow eyebrow">Research Portfolio &amp; Academic Narrative</div>
+    <h1>Understanding materials. <em>Engineering solutions.</em> Powering a sustainable future.</h1>
+    <p class="hero-sub">A young materials researcher driven by curiosity about the fundamental physics governing energy materials — with the long-term goal of translating that understanding into scalable renewable energy technologies.</p>
+    <div class="hero-meta">
+      <div><strong>Focus</strong>Nanophotonics · Optical Materials · Perovskite Solar Cells</div>
+      <div><strong>Publications</strong>3 peer-reviewed · 92 citations</div>
+      <div><strong>Seeking</strong>Doctoral research, Fall 2027</div>
+    </div>
+    <div class="spectrum-line">
+      <svg viewBox="0 0 1000 90" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="specGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#E8A33D"/>
+            <stop offset="50%" stop-color="#E4633D"/>
+            <stop offset="100%" stop-color="#2E8C86"/>
+          </linearGradient>
+        </defs>
+        <path class="spectrum-path" d="M0,70 C40,70 60,20 90,20 C120,20 130,65 160,65 C200,65 210,10 250,10 C290,10 300,55 340,58 C400,62 420,30 460,28 C520,25 540,60 590,60 C650,60 670,15 720,14 C770,13 790,50 840,52 C890,54 910,25 960,24 C980,24 990,40 1000,40"
+          fill="none" stroke="url(#specGrad)" stroke-width="2"/>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<!-- STORY -->
+<section class="story section-pad rule" id="story">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Opening Story</div>
+      <h2>Why materials, and why now</h2>
+    </div>
+    <blockquote class="reveal">
+      <p>Growing up in Bangladesh, I witnessed a country striving to meet rapidly increasing energy demand while remaining heavily dependent on finite fossil fuel resources. Today, nearly 55–67% of the country's electricity still comes from non-renewable sources, primarily natural gas — reserves projected to decline sharply within the coming decade. This is more than an energy statistic; it is a challenge that will shape the future of millions of lives.</p>
+      <span class="callout">That realization became the foundation of my research journey.</span>
+      <p>Rather than viewing energy as solely an engineering problem, I became fascinated by the materials that make energy conversion possible — why one material outperforms another, how microscopic defects shape macroscopic performance, and how subtle atomic changes fundamentally alter electronic and optical behavior.</p>
+      <p>This curiosity carried me from photovoltaic device simulation into computational materials science, where every project became another step toward one larger question: <strong>how can we design better materials to build better energy technologies?</strong></p>
+    </blockquote>
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<section class="section-pad rule" id="journey">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Academic Journey</div>
+      <h2>From asking "how" to asking "why"</h2>
+    </div>
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="tl-tag">UNDERGRADUATE</div>
+        <div class="tl-body">
+          <h3>Learning to ask questions</h3>
+          <p>Rather than simply learning existing technologies, I became interested in the physical mechanisms governing photovoltaic devices. My research centered on computational investigation of earth-abundant, lead-free perovskite solar cells using SCAPS-1D — spanning carrier transport, interface engineering, defect physics, device optimization, and semiconductor behavior. The work produced three peer-reviewed journal publications and established my foundation in computational research.</p>
+          <div class="tags">
+            <span class="tag">SCAPS-1D</span>
+            <span class="tag">Defect Physics</span>
+            <span class="tag">Device Optimization</span>
+            <span class="tag">Lead-Free Perovskites</span>
+          </div>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-tag">MASTER'S</div>
+        <div class="tl-body">
+          <h3>Looking deeper</h3>
+          <p>My master's work shifted from device-level optimization toward understanding materials at a more fundamental level.</p>
+          <div class="thesis">Thesis — Metal-to-Semiconductor Transition in NaWO₃ via Nb Doping: Electronic and Optical Insights for Solar Cell Applications</div>
+          <div class="qshift">
+            <span>"How can we improve a solar cell?"</span>
+            <span class="to">→ "Why does changing one atom change an entire material?"</span>
+          </div>
+          <p>Through density functional theory (DFT) calculations using VASP, I investigated how Nb doping reshapes the electronic and optical properties of NaWO₃ — deepening my understanding of electronic structure engineering and material functionality.</p>
+          <div class="tags">
+            <span class="tag">DFT / VASP</span>
+            <span class="tag">Electronic Structure</span>
+            <span class="tag">Doping Engineering</span>
+            <span class="tag">Optical Properties</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH CONTRIBUTIONS -->
+<section class="section-pad rule" id="research">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Research Contributions</div>
+      <h2>Publications</h2>
+    </div>
+
+    <div class="metrics-row reveal">
+      <div class="metric"><div class="num">3</div><div class="lbl">Peer-Reviewed Publications</div></div>
+      <div class="metric"><div class="num">92</div><div class="lbl">Citations</div></div>
+      <div class="metric"><div class="num">4</div><div class="lbl">Research Threads — Simulation, Defects, Transport, Computation</div></div>
+    </div>
+
+    <div class="pub-list reveal">
+      <div class="pub">
+        <div class="pub-year">2024</div>
+        <div>
+          <h4>Carrier Transport Layer Engineering of Cs₂TiI₂Br₄ Halide Double Perovskite Solar Cell via SCAPS-1D: Approaching the Shockley–Queisser Limit</h4>
+          <div class="journal">Micro and Nanostructures · Q2</div>
+        </div>
+      </div>
+      <div class="pub">
+        <div class="pub-year">2023</div>
+        <div>
+          <h4>Cs₂TiI₆ (Cs₂TiIₓBr₆₋ₓ) Halide Perovskite Solar Cell and Its Point Defect Analysis</h4>
+          <div class="journal">Nanomaterials · Q1</div>
+        </div>
+      </div>
+      <div class="pub">
+        <div class="pub-year">2021</div>
+        <div>
+          <h4>Highly Efficient Cesium Titanium (IV) Bromide Perovskite Solar Cell and Its Point Defect Investigation: A Computational Study</h4>
+          <div class="journal">Superlattices and Microstructures · Q2</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACADEMIC EXCELLENCE -->
+<section class="section-pad rule" id="excellence">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Academic Excellence</div>
+      <h2>Record</h2>
+    </div>
+    <div class="excellence-grid reveal">
+      <div class="ex-card">
+        <span class="deg">Master of Science</span>
+        <div class="gpa">3.70<small>/4.00</small></div>
+        <ul>
+          <li>Graduated with Distinction</li>
+          <li>Ranked 6th among 40 students</li>
+        </ul>
+      </div>
+      <div class="ex-card">
+        <span class="deg">Bachelor of Science</span>
+        <div class="gpa">3.58<small>/4.00</small></div>
+        <ul>
+          <li>Top 10% of graduating class</li>
+          <li>3.80 GPA in final 60 semester credits</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BEYOND THE LAB -->
+<section class="section-pad beyond" id="beyond">
+  <div class="ridge-bg">
+    <svg viewBox="0 0 1200 500" preserveAspectRatio="none">
+      <path d="M0,420 C100,380 160,300 240,320 C320,340 360,250 440,260 C520,270 560,180 640,190 C720,200 760,320 840,300 C920,280 960,180 1040,200 C1100,215 1150,260 1200,240" fill="none" stroke="#2E8C86" stroke-width="1.4" opacity="0.55"/>
+      <path d="M0,460 C120,430 180,360 260,380 C340,400 380,300 460,315 C540,330 580,230 660,245 C740,260 780,370 860,350 C940,330 980,240 1060,255 C1120,265 1160,300 1200,290" fill="none" stroke="#9FB8B2" stroke-width="1" opacity="0.35"/>
+      <path d="M0,380 C90,340 150,270 230,285 C310,300 350,220 430,230 C510,240 550,160 630,170 C710,180 750,280 830,265 C910,250 950,170 1030,185 C1090,195 1140,220 1200,210" fill="none" stroke="#E8A33D" stroke-width="1" opacity="0.3"/>
+    </svg>
+  </div>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Beyond the Laboratory</div>
+      <h2>Building, leading, and staying grounded</h2>
+    </div>
+    <div class="beyond-grid">
+      <div class="beyond-col reveal">
+        <div class="role-block">
+          <span class="role-tag">Research Assistant · Waziup e.V.</span>
+          <p>Contributing to international collaborations in renewable energy and IoT — developing technical proposals for European research initiatives, leading the technical direction of the KijaniBox project for renewable industrial automation, prototyping smart sensing systems, integrating solar-powered energy solutions, and training students and professionals in IoT and automation.</p>
+        </div>
+        <div class="role-block">
+          <span class="role-tag">Chair · IEEE Student Branch, University of Chittagong</span>
+          <p>Organized technical events, managed multidisciplinary teams, and communicated with international researchers. The branch ran numerous workshops and seminars under my leadership and contributed to an IEEE international conference.</p>
+        </div>
+        <div class="role-block">
+          <span class="role-tag">Co-Founder &amp; Mentor · SELF</span>
+          <p>Helped build an educational platform empowering women through technical education and mentorship, reflecting a commitment to increasing female participation in STEM.</p>
+        </div>
+        <div class="role-block">
+          <span class="role-tag">Engineering Projects</span>
+          <p>Smart garbage management, IoT-enabled home security, energy harvesting from footsteps and vehicle pressure, PCB design, and renewable energy monitoring — a running belief that meaningful innovation happens where fundamental science meets practical engineering.</p>
+        </div>
+      </div>
+      <div class="beyond-col reveal">
+        <div class="life-card">
+          <div class="eyebrow">Off the bench</div>
+          <p>Outside the lab, I'm drawn outdoors — the same curiosity that pulls me toward defect physics and light-matter interaction pulls me toward trails, open water, and unfamiliar terrain.</p>
+          <p>Hiking and swimming are where I reset: long, quiet stretches of thinking that often circle back to the research questions I left on my desk.</p>
+          <div class="life-tags">
+            <span class="life-tag">Hiking</span>
+            <span class="life-tag">Open-water swimming</span>
+            <span class="life-tag">Nature &amp; the outdoors</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HONORS -->
+<section class="section-pad rule" id="honors">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Honors &amp; Recognition</div>
+      <h2>Milestones</h2>
+    </div>
+    <div class="honors-list reveal">
+      <div class="honor">
+        <div class="honor-year">2021</div>
+        <div>
+          <h4>Google Generation Scholarship — Finalist</h4>
+          <p>One of only two candidates selected from Bangladesh for the final round in the Asia-Pacific region.</p>
+        </div>
+      </div>
+      <div class="honor">
+        <div class="honor-year">2022</div>
+        <div>
+          <h4>IEEE Award</h4>
+          <p>Recognized for leadership as Chair of the IEEE Student Branch.</p>
+        </div>
+      </div>
+      <div class="honor">
+        <div class="honor-year">2020</div>
+        <div>
+          <h4>National Hackathon on Frontier Technologies — Finalist</h4>
+          <p>Top 30 of over 500 competing teams.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISION -->
+<section class="vision rule" id="vision">
+  <div class="wrap vision-inner reveal">
+    <div class="eyebrow">Looking Forward</div>
+    <h2 style="margin-top:18px; margin-bottom:34px; font-size:clamp(1.6rem,3vw,2.2rem);">The next phase is driven by a broader ambition than optimizing a single class of materials.</h2>
+    <p style="color:var(--mist); font-weight:300; max-width:70ch; margin-bottom:40px;">I am eager to investigate how light interacts with matter, how electronic structures govern functionality, and how computational and experimental approaches can combine to create transformative energy technologies — in environments that foster interdisciplinary collaboration across optics, photonics, semiconductor physics, advanced materials, and renewable energy.</p>
+    <blockquote>"To understand materials at their most fundamental level, transform that understanding into technologies that address global energy challenges, and inspire future generations — especially young women — to pursue scientific discovery with curiosity, resilience, and purpose."</blockquote>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-cta reveal">
+        <h3>Let's talk research.</h3>
+        <p>Open to conversations with prospective advisors and doctoral programs for Fall 2027.</p>
+      </div>
+      <div class="contact-list reveal">
+        <a href="mailto:tasnimtareqfn@gmail.com">tasnimtareqfn@gmail.com</a>
+        <a href="https://www.linkedin.com/in/tasnim-tareq/">linkedin</a>
+        <a href="https://scholar.google.com/citations?user=YgpKvK4AAAAJ&hl=en">Google Scholar</a>
+        <a href="https://github.com/Tasnim-Tareq">Github</a>
+      </div>
+    </div>
+    <div class="foot-note">
+<!----<span>Research Portfolio &amp; Academic Narrative</span> -->
+      <span>Updated 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.12});
+  revealEls.forEach(el=>io.observe(el));
+
+  // Active nav link on scroll
+  const navLinks = document.querySelectorAll('[data-nav]');
+  const sections = Array.from(navLinks).map(l=>document.querySelector(l.getAttribute('href')));
+  const navIO = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      const id = '#'+entry.target.id;
+      const link = document.querySelector('[data-nav][href="'+id+'"]');
+      if(!link) return;
+      if(entry.isIntersecting){
+        navLinks.forEach(l=>l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, {rootMargin:'-45% 0px -45% 0px'});
+  sections.forEach(s=>{ if(s) navIO.observe(s); });
+</script>
+
+</body>
+</html>
